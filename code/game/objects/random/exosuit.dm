@@ -47,7 +47,7 @@
 //		/obj/item/mech_equipment/cable_layer,
 //		/obj/item/mech_equipment/syringe_gun,
 //		/obj/item/mech_equipment/thruster = 2,
-		/obj/item/mech_equipment/clamp,
+		/obj/item/mech_equipment/mech_clamp,
 		/obj/item/mech_equipment/drill,
 //		/obj/item/mech_equipment/drill/diamonddrill,
 		/obj/item/mech_equipment/mounted_system/extinguisher,

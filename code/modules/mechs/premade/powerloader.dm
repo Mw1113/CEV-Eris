@@ -10,7 +10,7 @@
 	)
 	installed_systems = list(
 		HARDPOINT_LEFT_HAND = /obj/item/mech_equipment/drill,
-		HARDPOINT_RIGHT_HAND = /obj/item/mech_equipment/clamp,
+		HARDPOINT_RIGHT_HAND = /obj/item/mech_equipment/mech_clamp,
 		HARDPOINT_HEAD = /obj/item/mech_equipment/light,
 	)
 

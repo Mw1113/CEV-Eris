@@ -675,7 +675,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 	name = "exosuit assembly crate (\"Ripley\" APLU)"
 	contains = list(
 		/obj/item/mech_equipment/drill,
-		/obj/item/mech_equipment/clamp,
+		/obj/item/mech_equipment/mech_clamp,
 		/obj/item/mech_equipment/light,
 		/obj/item/mech_component/sensors/powerloader,
 		/obj/item/mech_component/chassis/powerloader,

@@ -42,7 +42,7 @@
 //UTILITY
 /datum/design/research/item/exosuit/hydraulic_clamp
 	name = "hydraulic clamp"
-	build_path = /obj/item/mech_equipment/clamp
+	build_path = /obj/item/mech_equipment/mech_clamp
 
 /datum/design/research/item/exosuit/drill
 	name = "drill"

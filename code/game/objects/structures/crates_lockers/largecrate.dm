@@ -39,7 +39,7 @@
 			var/obj/item/mech_equipment/ME
 			var/mob/living/exosuit/working/hoverpod/H = new (loc)
 
-			ME = new /obj/item/mech_equipment/clamp
+			ME = new /obj/item/mech_equipment/mech_clamp
 			ME.attach(H)
 			ME = new /obj/item/mech_equipment/tool/passenger
 			ME.attach(H)

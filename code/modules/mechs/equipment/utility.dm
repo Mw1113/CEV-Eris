@@ -1,4 +1,4 @@
-/obj/item/mech_equipment/clamp
+/obj/item/mech_equipment/mech_clamp
 	name = "mounted clamp"
 	desc = "A large, heavy industrial cargo loading clamp."
 	icon_state = "mech_clamp"
@@ -7,10 +7,10 @@
 	var/obj/carrying
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
 
-/obj/item/mech_equipment/clamp/attack()
+/obj/item/mech_equipment/mech_clamp/attack()
 	return 0
 
-/obj/item/mech_equipment/clamp/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
+/obj/item/mech_equipment/mech_clamp/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	. = ..()
 
 	if(. && !carrying)
@@ -54,7 +54,7 @@
 				to_chat(user, "You push [target] out of the way.")
 				owner.visible_message("[owner] pushes [target] out of the way.")
 
-/obj/item/mech_equipment/clamp/attack_self(var/mob/user)
+/obj/item/mech_equipment/mech_clamp/attack_self(var/mob/user)
 	. = ..()
 	if(.)
 		if(!carrying)
@@ -64,7 +64,7 @@
 			carrying.forceMove(get_turf(src))
 			carrying = null
 
-/obj/item/mech_equipment/clamp/get_hardpoint_maptext()
+/obj/item/mech_equipment/mech_clamp/get_hardpoint_maptext()
 	if(carrying)
 		return carrying.name
 	. = ..()
