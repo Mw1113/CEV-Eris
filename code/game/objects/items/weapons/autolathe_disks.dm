@@ -79,6 +79,7 @@
 		/datum/design/autolathe/container/bucket,
 		/datum/design/autolathe/container/jar,
 		/datum/design/autolathe/container/syringe,
+		/datum/design/autolathe/container/syringe/large,
 		/datum/design/autolathe/container/vial,
 		/datum/design/autolathe/container/beaker,
 		/datum/design/autolathe/container/beaker_large,
@@ -89,6 +90,8 @@
 		/datum/design/autolathe/misc/floor_light,
 		/datum/design/autolathe/misc/tube,
 		/datum/design/autolathe/misc/bulb,
+		/datum/design/autolathe/device/floorpainter,
+		/datum/design/autolathe/device/mechpainter
 	)
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/design/devices
@@ -113,7 +116,8 @@
 		/datum/design/autolathe/device/export_scanner,
 		/datum/design/autolathe/device/implanter,
 		/datum/design/autolathe/device/hand_labeler,
-		/datum/design/research/item/light_replacer
+		/datum/design/research/item/light_replacer,
+		/datum/design/autolathe/sec/hailer,
 	)
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/design/robustcells
@@ -187,13 +191,14 @@
 
 	license = 10
 	designs = list(
-		/datum/design/autolathe/circuit/airlockmodule,
-		/datum/design/autolathe/circuit/airalarm,
-		/datum/design/autolathe/circuit/firealarm,
-		/datum/design/autolathe/circuit/powermodule,
+		/datum/design/autolathe/circuit/airlockmodule = 0,
+		/datum/design/autolathe/circuit/airlockmodule/secure,
+		/datum/design/autolathe/circuit/airalarm = 0,
+		/datum/design/autolathe/circuit/firealarm = 0,
+		/datum/design/autolathe/circuit/powermodule = 0,
 		/datum/design/autolathe/circuit/recharger,
 		/datum/design/research/circuit/autolathe,
-		/datum/design/autolathe/circuit/autolathe_disk_cloner,
+		/datum/design/autolathe/circuit/autolathe_disk_cloner = 3,
 		/datum/design/autolathe/circuit/vending,
 		/datum/design/research/circuit/arcade_battle,
 		/datum/design/research/circuit/arcade_orion_trail,
@@ -204,16 +209,19 @@
 		/datum/design/autolathe/circuit/centrifuge,
 		/datum/design/autolathe/circuit/electrolyzer,
 		/datum/design/autolathe/circuit/reagentgrinder,
+		/datum/design/autolathe/circuit/industrialgrinder = 2,
 	)
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/design/conveyors
-	disk_name = "Technomancers LAT-018 Conveyors"
+	disk_name = "Technomancers LAT-018 Logistics"
 	icon_state = "technomancers"
 
-	license = -1
+	license = 10
 	designs = list(
-		/datum/design/autolathe/conveyor,
-		/datum/design/autolathe/conveyor_switch
+		/datum/design/autolathe/conveyor = 0,
+		/datum/design/autolathe/conveyor_switch = 0,
+		/datum/design/autolathe/circuit/smelter = 4,
+		/datum/design/autolathe/circuit/sorter = 2
 	)
 
 
@@ -242,6 +250,16 @@
 		/datum/design/autolathe/container/freezer_medical,
 		/datum/design/autolathe/device/implanter,
 		/datum/design/autolathe/container/syringegun_ammo,
+
+	)
+
+/obj/item/weapon/computer_hardware/hard_drive/portable/design/surgery
+	disk_name = "Back Alley Organs"
+	icon_state = "moebius"
+
+	license = 5
+	designs = list(
+		/datum/design/bioprinter/lungs
 	)
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/design/computer
@@ -274,12 +292,16 @@
 		/datum/design/autolathe/computer_part/gps,
 		/datum/design/autolathe/computer_part/scanner/paper,
 		/datum/design/autolathe/computer_part/scanner/atmos,
+		/datum/design/autolathe/computer_part/scanner/reagent,
+		/datum/design/autolathe/computer_part/scanner/medical,
 	)
 
 
 // NeoTheology
+
+// Foodstuffs, fertilizers, medical and cleaning utilities
 /obj/item/weapon/computer_hardware/hard_drive/portable/design/nt_bioprinter
-	disk_name = "NeoTheology Bioprinter Production"
+	disk_name = "NeoTheology Bioprinter Products and Utilities"
 	icon_state = "neotheology"
 
 	license = -1
@@ -292,16 +314,49 @@
 		/datum/design/bioprinter/l4z,
 		/datum/design/bioprinter/rh,
 
+		/datum/design/bioprinter/medical/bruise,
+		/datum/design/bioprinter/medical/splints,
+		/datum/design/bioprinter/medical/ointment,
+		/datum/design/bioprinter/medical/advanced/bruise,
+		/datum/design/bioprinter/medical/advanced/ointment,
+
+		/datum/design/autolathe/gun/nt_sprayer,
+		/datum/design/autolathe/gun/plasma/martyr,
+		/datum/design/autolathe/device/grenade/nt_cleaner,
+		/datum/design/autolathe/device/grenade/nt_weedkiller
+
+	)
+
+// Clothes, armor and accesories
+/obj/item/weapon/computer_hardware/hard_drive/portable/design/nt_bioprinter_clothes
+	disk_name = "NeoTheology Bio-Fabric Designs"
+	icon_state = "neotheology"
+
+	license = -1
+	designs = list(
+		/datum/design/bioprinter/nt_clothes/acolyte_armor,
+		/datum/design/bioprinter/nt_clothes/agrolyte_armor,
+		/datum/design/bioprinter/nt_clothes/custodian_armor,
+
+		/datum/design/bioprinter/nt_clothes/preacher_coat,
+		/datum/design/bioprinter/nt_clothes/acolyte_jacket,
+		/datum/design/bioprinter/nt_clothes/sports_jacket,
+
+		/datum/design/bioprinter/nt_clothes/acolyte_uniform,
+		/datum/design/bioprinter/nt_clothes/sports_uniform,
+		/datum/design/bioprinter/nt_clothes/church_uniform,
+
+		/datum/design/bioprinter/belt/security/neotheology,
+		/datum/design/bioprinter/belt/utility/neotheology,
+
+		/datum/design/bioprinter/satchel,
+		/datum/design/bioprinter/leather_jacket,
 		/datum/design/bioprinter/wallet,
 		/datum/design/bioprinter/botanic_leather,
-		/datum/design/bioprinter/leather/satchel,
-		/datum/design/bioprinter/leather/leather_jacket,
-		/datum/design/bioprinter/leather/cash_bag,
+
 		/datum/design/bioprinter/belt/utility,
-		/datum/design/bioprinter/belt/utility/neotheology,
 		/datum/design/bioprinter/belt/medical,
 		/datum/design/bioprinter/belt/security,
-		/datum/design/bioprinter/belt/security/neotheology,
 		/datum/design/bioprinter/belt/medical/emt,
 		/datum/design/bioprinter/belt/misc/champion,
 
@@ -310,16 +365,11 @@
 		/datum/design/bioprinter/leather/holster/waist,
 		/datum/design/bioprinter/leather/holster/hip,
 
-		/datum/design/bioprinter/medical/bruise,
-		/datum/design/bioprinter/medical/splints,
-		/datum/design/bioprinter/medical/ointment,
-		/datum/design/bioprinter/medical/advanced/bruise,
-		/datum/design/bioprinter/medical/advanced/ointment,
-
-		/datum/design/autolathe/gun/nt_sprayer
+   		/datum/design/autolathe/device/headset_church,
+		/datum/design/bioprinter/leather/cash_bag
 	)
 
-// Same as the other NT disk, minus the medical designs and encryption key. Should spawn in public access bioprinters if they get added by any chance.
+// Kinda like the regular product NT disk, minus the grenades, soap and the cleaner carbine. Should spawn in public access bioprinters if they get added by any chance.
 /obj/item/weapon/computer_hardware/hard_drive/portable/design/nt_bioprinter_public
 	disk_name = "NeoTheology Bioprinter Pack"
 	icon_state = "neotheology"
@@ -335,8 +385,8 @@
 
 		/datum/design/bioprinter/wallet,
 		/datum/design/bioprinter/botanic_leather,
-		/datum/design/bioprinter/leather/satchel,
-		/datum/design/bioprinter/leather/leather_jacket,
+		/datum/design/bioprinter/satchel,
+		/datum/design/bioprinter/leather_jacket,
 		/datum/design/bioprinter/leather/cash_bag,
 		/datum/design/bioprinter/belt/utility,
 		/datum/design/bioprinter/belt/utility/neotheology,
@@ -395,6 +445,7 @@
 		/datum/design/autolathe/tool/tacknife,
 		/datum/design/autolathe/sec/beartrap,
 		/datum/design/autolathe/sec/silencer,
+		/datum/design/autolathe/sec/hailer
 	)
 
 // One Star
@@ -475,10 +526,10 @@
 	license = 20
 	designs = list(
 		/datum/design/autolathe/ammo/pistol_ammobox,
-		/datum/design/autolathe/ammo/pistol_ammobox/practice,
+		/datum/design/autolathe/ammo/pistol_ammobox/practice = 0,
 		/datum/design/autolathe/ammo/pistol_ammobox/rubber,
 		/datum/design/autolathe/ammo/magnum_ammobox,
-		/datum/design/autolathe/ammo/magnum_ammobox/practice,
+		/datum/design/autolathe/ammo/magnum_ammobox/practice = 0,
 		/datum/design/autolathe/ammo/magnum_ammobox/rubber,
 	)
 
@@ -489,17 +540,17 @@
 	license = 20
 	designs = list(
 		/datum/design/autolathe/ammo/srifle_ammobox_small,
-		/datum/design/autolathe/ammo/srifle_ammobox_small/practice,
+		/datum/design/autolathe/ammo/srifle_ammobox_small/practice = 0,
 		/datum/design/autolathe/ammo/srifle_ammobox_small/rubber,
 		/datum/design/autolathe/ammo/srifle_ammobox,
 		/datum/design/autolathe/ammo/srifle_ammobox/rubber,
 		/datum/design/autolathe/ammo/clrifle_ammobox_small,
-		/datum/design/autolathe/ammo/clrifle_ammobox_small/practice,
+		/datum/design/autolathe/ammo/clrifle_ammobox_small/practice = 0,
 		/datum/design/autolathe/ammo/clrifle_ammobox_small/rubber,
 		/datum/design/autolathe/ammo/clrifle_ammobox,
 		/datum/design/autolathe/ammo/clrifle_ammobox/rubber,
 		/datum/design/autolathe/ammo/lrifle_ammobox_small,
-		/datum/design/autolathe/ammo/lrifle_ammobox_small/practice,
+		/datum/design/autolathe/ammo/lrifle_ammobox_small/practice = 0,
 		/datum/design/autolathe/ammo/lrifle_ammobox_small/rubber,
 		/datum/design/autolathe/ammo/lrifle_ammobox,
 	)
@@ -556,6 +607,10 @@
 		/datum/design/autolathe/cell/small/excelsior,
 		/datum/design/autolathe/device/excelsiormine,				//security
 		/datum/design/autolathe/sec/beartrap,
+		/datum/design/autolathe/prosthesis/excelsior/l_arm,         //prostheses
+		/datum/design/autolathe/prosthesis/excelsior/r_arm,
+		/datum/design/autolathe/prosthesis/excelsior/l_leg,
+		/datum/design/autolathe/prosthesis/excelsior/r_leg,
 		/datum/design/autolathe/device/implanter,					//misc
 		/datum/design/autolathe/device/propaganda_chip,
 		/datum/design/autolathe/clothing/excelsior_armor,
@@ -611,9 +666,10 @@
 		/datum/design/autolathe/gun/olivaw = 3,
 		/datum/design/autolathe/gun/clarissa = 3,
 		/datum/design/autolathe/gun/havelock = 3,
-		/datum/design/autolathe/ammo/magazine_pistol/practice,
+		/datum/design/autolathe/ammo/magazine_pistol,
+		/datum/design/autolathe/ammo/magazine_pistol/practice = 0,
 		/datum/design/autolathe/ammo/magazine_pistol/rubber,
-		/datum/design/autolathe/ammo/sl_pistol/practice,
+		/datum/design/autolathe/ammo/sl_pistol/practice = 0,
 		/datum/design/autolathe/ammo/sl_pistol/rubber,
 		)
 
@@ -625,7 +681,8 @@
 	designs = list(
 		/datum/design/autolathe/gun/mk58 = 3,
 		/datum/design/autolathe/gun/mk58_wood = 3,
-		/datum/design/autolathe/ammo/magazine_pistol/practice,
+		/datum/design/autolathe/ammo/magazine_pistol,
+		/datum/design/autolathe/ammo/magazine_pistol/practice = 0,
 		/datum/design/autolathe/ammo/magazine_pistol/rubber,
 	)
 
@@ -636,7 +693,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/colt = 3, //"FS HG .35 Auto \"Colt M1911\""
-		/datum/design/autolathe/ammo/magazine_pistol/practice,
+		/datum/design/autolathe/ammo/magazine_pistol,
+		/datum/design/autolathe/ammo/magazine_pistol/practice = 0,
 		/datum/design/autolathe/ammo/magazine_pistol/rubber,
 	)
 
@@ -647,7 +705,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/mandella = 3, // "FS HG .25 Caseless \"Mandella\""
-		/datum/design/autolathe/ammo/cspistol/practice,
+		/datum/design/autolathe/ammo/cspistol,
+		/datum/design/autolathe/ammo/cspistol/practice = 0,
 		/datum/design/autolathe/ammo/cspistol/rubber,
 	)
 
@@ -660,7 +719,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/revolver = 3, // "FS REV .40 \"Miller\""
-		/datum/design/autolathe/ammo/sl_magnum/practice,
+		/datum/design/autolathe/ammo/sl_magnum,
+		/datum/design/autolathe/ammo/sl_magnum/practice = 0,
 		/datum/design/autolathe/ammo/sl_magnum/rubber,
 		)
 
@@ -671,7 +731,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/revolver_consul = 3, // "FS REV .40 \"Consul\""
-		/datum/design/autolathe/ammo/sl_magnum/practice,
+		/datum/design/autolathe/ammo/sl_magnum,
+		/datum/design/autolathe/ammo/sl_magnum/practice = 0,
 		/datum/design/autolathe/ammo/sl_magnum/rubber,
 		)
 
@@ -682,7 +743,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/revolver_deckard = 3, // "FS REV .40 \"Deckard\""
-		/datum/design/autolathe/ammo/sl_magnum/practice,
+		/datum/design/autolathe/ammo/sl_magnum,
+		/datum/design/autolathe/ammo/sl_magnum/practice = 0,
 		/datum/design/autolathe/ammo/sl_magnum/rubber,
 		)
 
@@ -693,7 +755,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/revolver_mateba = 3, // "FS REV .40 Magnum \"Mateba\""
-		/datum/design/autolathe/ammo/sl_magnum/practice,
+		/datum/design/autolathe/ammo/sl_magnum,
+		/datum/design/autolathe/ammo/sl_magnum/practice = 0,
 		/datum/design/autolathe/ammo/sl_magnum/rubber,
 		)
 
@@ -706,7 +769,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/lamia = 3, // "FS HG .40 \"Lamia\""
-		/datum/design/autolathe/ammo/mg_magnum/practice,
+		/datum/design/autolathe/ammo/mg_magnum,
+		/datum/design/autolathe/ammo/mg_magnum/practice = 0,
 		/datum/design/autolathe/ammo/mg_magnum/rubber,
 		)
 
@@ -717,7 +781,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/avasarala = 3, // "FS HG .40 \"Avasarala\""
-		/datum/design/autolathe/ammo/mg_magnum/practice,
+		/datum/design/autolathe/ammo/mg_magnum,
+		/datum/design/autolathe/ammo/mg_magnum/practice = 0,
 		/datum/design/autolathe/ammo/mg_magnum/rubber,
 		)
 
@@ -730,6 +795,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/doublebarrel = 3, // "double-barreled shotgun"
+		/datum/design/autolathe/ammo/shotgun_pellet,
+		/datum/design/autolathe/ammo/shotgun,
 		/datum/design/autolathe/ammo/shotgun_beanbag,
 		/datum/design/autolathe/ammo/shotgun_blanks,
 		/datum/design/autolathe/ammo/shotgun_flash,
@@ -742,6 +809,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/pump_shotgun = 3, // "FS SG \"Kammerer\""
+		/datum/design/autolathe/ammo/shotgun_pellet,
+		/datum/design/autolathe/ammo/shotgun,
 		/datum/design/autolathe/ammo/shotgun_beanbag,
 		/datum/design/autolathe/ammo/shotgun_blanks,
 		/datum/design/autolathe/ammo/shotgun_flash,
@@ -754,6 +823,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/regulator = 3, // "NT SG \"Regulator 1000\""
+		/datum/design/autolathe/ammo/shotgun_pellet,
+		/datum/design/autolathe/ammo/shotgun,
 		/datum/design/autolathe/ammo/shotgun_beanbag,
 		/datum/design/autolathe/ammo/shotgun_blanks,
 		/datum/design/autolathe/ammo/shotgun_flash,
@@ -766,6 +837,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/gladstone = 3, // "FS SG \"Gladstone\""
+		/datum/design/autolathe/ammo/shotgun_pellet,
+		/datum/design/autolathe/ammo/shotgun,
 		/datum/design/autolathe/ammo/shotgun_beanbag,
 		/datum/design/autolathe/ammo/shotgun_blanks,
 		/datum/design/autolathe/ammo/shotgun_flash,
@@ -786,14 +859,15 @@
 // SMGs
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/design/guns/fs_paco
-	disk_name = "Frozen Star - .35 Paco SMG"
+	disk_name = "Frozen Star - .35 Paco HG"
 	icon_state = "frozenstar"
 
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/paco = 3, // "FS HG .35 \"Paco\""
-		/datum/design/autolathe/ammo/smg/practice,
-		/datum/design/autolathe/ammo/smg/rubber,
+		/datum/design/autolathe/ammo/magazine_pistol,
+		/datum/design/autolathe/ammo/magazine_pistol/practice = 0,
+		/datum/design/autolathe/ammo/magazine_pistol/rubber,
 	)
 
 /obj/item/weapon/computer_hardware/hard_drive/portable/design/guns/fs_straylight
@@ -803,7 +877,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/straylight = 3, // "FS SMG .35 \"Straylight\""
-		/datum/design/autolathe/ammo/smg/practice,
+		/datum/design/autolathe/ammo/smg,
+		/datum/design/autolathe/ammo/smg/practice = 0,
 		/datum/design/autolathe/ammo/smg/rubber,
 	)
 
@@ -814,7 +889,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/molly = 3, // "FS MP .35 \"Molly\""
-		/datum/design/autolathe/ammo/smg/practice,
+		/datum/design/autolathe/ammo/smg,
+		/datum/design/autolathe/ammo/smg/practice = 0,
 		/datum/design/autolathe/ammo/smg/rubber,
 	)
 
@@ -825,7 +901,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/zoric = 3, // "SA SMG .40 \"Zoric\""
-		/datum/design/autolathe/ammo/msmg/practice,
+		/datum/design/autolathe/ammo/msmg,
+		/datum/design/autolathe/ammo/msmg/practice = 0,
 		/datum/design/autolathe/ammo/msmg/rubber,
 	)
 
@@ -836,7 +913,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/atreides = 3, // "FS SMG .35 \"Atreides\""
-		/datum/design/autolathe/ammo/smg/practice,
+		/datum/design/autolathe/ammo/smg,
+		/datum/design/autolathe/ammo/smg/practice = 0,
 		/datum/design/autolathe/ammo/smg/rubber,
 	)
 
@@ -864,7 +942,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/z8 = 3, // "FS CAR .20 \"Z8 Bulldog\""
-		/datum/design/autolathe/ammo/srifle/practice,
+		/datum/design/autolathe/ammo/srifle,
+		/datum/design/autolathe/ammo/srifle/practice = 0,
 		/datum/design/autolathe/ammo/srifle/rubber,
 	)
 
@@ -875,7 +954,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/wintermute = 3, // "FS BR .20 \"Wintermute\""
-		/datum/design/autolathe/ammo/srifle/practice,
+		/datum/design/autolathe/ammo/srifle,
+		/datum/design/autolathe/ammo/srifle/practice = 0,
 		/datum/design/autolathe/ammo/srifle/rubber,
 	)
 
@@ -888,7 +968,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/sol = 3, // "FS CAR .25 caseless \"Sol\""
-		/datum/design/autolathe/ammo/ihclrifle/practice,
+		/datum/design/autolathe/ammo/ihclrifle,
+		/datum/design/autolathe/ammo/ihclrifle/practice = 0,
 		/datum/design/autolathe/ammo/ihclrifle/rubber,
 	)
 
@@ -922,7 +1003,8 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/ak47_fs = 3, // "FS AR .30 \"Kalashnikov\""
-		/datum/design/autolathe/ammo/lrifle/practice,
+		/datum/design/autolathe/ammo/lrifle,
+		/datum/design/autolathe/ammo/lrifle/practice = 0,
 		/datum/design/autolathe/ammo/lrifle/rubber,
 	)
 
@@ -979,6 +1061,16 @@
 	license = 12
 	designs = list(
 		/datum/design/autolathe/gun/taser = 3, // "NT SP \"Counselor\""
+		/datum/design/autolathe/cell/medium/high,
+	)
+
+/obj/item/weapon/computer_hardware/hard_drive/portable/design/guns/nt_svalinn
+	disk_name = "NeoTheology Armory - NT LP \"Svalinn\""
+	icon_state = "neotheology"
+
+	license = 12
+	designs = list(
+		/datum/design/autolathe/gun/nt_svalinn = 3,
 		/datum/design/autolathe/cell/small/high,
 	)
 

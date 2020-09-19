@@ -90,13 +90,13 @@ var/list/possible_cable_coil_colours = list(
 
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level==1) hide(!T.is_plating())
-	cable_list += src //add it to the global cable list
+	GLOB.cable_list += src //add it to the global cable list
 
 
 /obj/structure/cable/Destroy()					// called when a cable is deleted
 	if(powernet)
 		cut_cable_from_powernet()				// update the powernets
-	cable_list -= src							//remove it from global cable list
+	GLOB.cable_list -= src							//remove it from global cable list
 	. = ..()										// then go ahead and delete the cable
 
 ///////////////////////////////////
@@ -165,23 +165,31 @@ var/list/possible_cable_coil_colours = list(
 			to_chat(user, "Not enough cable")
 			return
 		if(user.a_intent == I_HURT)
+			if(used_now)
+				to_chat(user, SPAN_WARNING("You are already splicing the [src.name]!")) //don't want people stacking splices on one turf
+				return
+			used_now = TRUE
 			if(locate(/obj/structure/wire_splicing) in T)
 				to_chat(user, SPAN_WARNING("There is splicing already!"))
+				used_now = FALSE
 				return
 			to_chat(user, SPAN_NOTICE("You started messsing with wires..."))
 			if(shock(user, 100)) //check if he got his insulation gloves
+				used_now = FALSE
 				return 		//he didn't
-			if(do_after(user, 20))
+			if(do_after(user, 20, src))
 				var/fail_chance = FAILCHANCE_HARD - user.stats.getStat(STAT_MEC) // 72 for assistant
 				if(prob(fail_chance))
 					if(!shock(user, 100)) //why not
 						to_chat(user, SPAN_WARNING("You failed to finish your task with [src.name]! There was a [fail_chance]% chance to screw this up."))
+					used_now = FALSE
 					return
 
 				//all clear, update things
 				coil.use(1)
 				spawnSplicing()
 				to_chat(user, SPAN_NOTICE("You have created such a mess. Shame."))
+				used_now = FALSE
 		else
 			coil.cable_join(src, user)
 
@@ -245,7 +253,7 @@ var/list/possible_cable_coil_colours = list(
 	return
 
 // shock the user with probability prb
-/obj/structure/cable/proc/shock(mob/user, prb, var/siemens_coeff = 1.0)
+/obj/structure/cable/proc/shock(mob/user, prb, var/siemens_coeff = 1)
 	if(!prob(prb))
 		return 0
 	if (electrocute_mob(user, powernet, src, siemens_coeff))
@@ -259,14 +267,14 @@ var/list/possible_cable_coil_colours = list(
 //explosion handling
 /obj/structure/cable/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(1)
 			qdel(src)
-		if(2.0)
+		if(2)
 			if (prob(50))
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				qdel(src)
 
-		if(3.0)
+		if(3)
 			if (prob(25))
 				new/obj/item/stack/cable_coil(src.loc, src.d1 ? 2 : 1, color)
 				qdel(src)

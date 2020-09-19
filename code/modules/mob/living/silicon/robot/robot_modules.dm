@@ -16,7 +16,7 @@ var/global/list/robot_modules = list(
 	name = "robot module"
 	icon = 'icons/obj/module.dmi'
 	icon_state = "std_module"
-	w_class = 100.0
+	w_class = 100
 	item_state = "electronic"
 	flags = CONDUCT
 	var/hide_on_manifest = FALSE
@@ -53,8 +53,8 @@ var/global/list/robot_modules = list(
 
 	//Module stats, these are applied to the robot
 	health = 200 //Max health. Apparently this is already defined in item.dm
-	var/speed_factor = 1.0 //Speed factor, applied as a divisor on movement delay
-	var/power_efficiency = 1.0 //Power efficiency, applied as a divisor on power taken from the internal cell
+	var/speed_factor = 1 //Speed factor, applied as a divisor on movement delay
+	var/power_efficiency = 1 //Power efficiency, applied as a divisor on power taken from the internal cell
 
 	//Stat modifiers for skillchecks
 	var/list/stat_modifiers = list(
@@ -110,12 +110,14 @@ var/global/list/robot_modules = list(
 	for (var/obj/item/weapon/tool/T in modules)
 		T.degradation = 0 //We don't want robot tools breaking
 
-
+	//A quick hack to stop robot modules running out of power
+	//Later they'll be wired to the robot's central battery once we code functionality for that
+	//Setting it to infinity causes errors, so just a high number is fine
 	for (var/obj/item/I in modules)
-		for (var/obj/item/weapon/cell/C in I)
-			C.charge = 999999999 //A quick hack to stop robot modules running out of power
-			//Later they'll be wired to the robot's central battery once we code functionality for that
-			//Setting it to infinity causes errors, so just a high number is fine
+		if(!istype(I, /obj/item/weapon/gun/energy)) // Guns have their own code for drawing charge from cyborg cell
+			for (var/obj/item/weapon/cell/C in I)
+				C.charge = 999999999
+	// I wanna make component cell holders soooo bad, but it's going to be a big refactor, and I don't have the time -- ACCount
 
 /obj/item/weapon/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
 	remove_camera_networks(R)
@@ -435,6 +437,17 @@ var/global/list/robot_modules = list(
 
 	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(15000)
 	synths += medicine
+
+	var/obj/item/stack/medical/advanced/bruise_pack/B = new /obj/item/stack/medical/advanced/bruise_pack(src)
+	var/obj/item/stack/medical/advanced/ointment/O = new /obj/item/stack/medical/advanced/ointment(src)
+	B.uses_charge = 1
+	B.charge_costs = list(1000)
+	B.synths = list(medicine)
+	O.uses_charge = 1
+	O.charge_costs = list(1000)
+	O.synths = list(medicine)
+	src.modules += B
+	src.modules += O
 
 	var/obj/item/stack/medical/splint/S = new /obj/item/stack/medical/splint(src)
 	S.uses_charge = 1
@@ -918,7 +931,7 @@ var/global/list/robot_modules = list(
 					)
 
 	health = 160 //Weak
-	speed_factor = 1.0 //Average
+	speed_factor = 1 //Average
 	power_efficiency = 0.75 //Poor efficiency
 
 	desc = "Built for working in a well-equipped lab, and designed to handle a wide variety of research \

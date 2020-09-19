@@ -24,7 +24,16 @@
 		"an ablative armor vest" = /obj/item/clothing/suit/armor/laserproof,
 		"an Ironhammer hardsuit control module" = /obj/item/weapon/rig/combat/ironhammer,
 		"a Bluespace Biosyphon" = /obj/item/biosyphon,
-		"a S REV .35 Auto \"Sky Driver\"" = /obj/item/weapon/gun/projectile/revolver/sky_driver
+		"a S REV .35 Auto \"Sky Driver\"" = /obj/item/weapon/gun/projectile/revolver/sky_driver,
+		"Von-Krabin Stimulator" = /obj/item/device/von_krabin,
+		"Molitor-Riedel Enricher" = /obj/item/weapon/reagent_containers/enricher,
+		"an Ancient Maneki Neko" = /obj/item/weapon/maneki_neko,
+		"a Reality Complicator" = /obj/item/weapon/complicator,
+		"a Techno-Tribalism Enforcer" = /obj/item/device/techno_tribalism,
+		"an Random wave radio" = /obj/item/device/radio/random_radio,
+		"the Sword of Truth" = /obj/item/weapon/tool/sword/nt_sword,
+		"the Last Shelter" = /obj/item/device/last_shelter,
+		"an Atomic Distillery" = /obj/item/weapon/reagent_containers/atomic_distillery
 	)
 
 	var/global/possible_items_special[] = list(
@@ -71,7 +80,7 @@
 	switch(target_name)
 		if("28 moles of plasma (full tank)", "10 diamonds", "50 gold bars", "25 refined uranium bars")
 			var/target_amount = text2num(target_name)//Non-numbers are ignored.
-			var/found_amount = 0.0//Always starts as zero.
+			var/found_amount = 0//Always starts as zero.
 
 			for(var/obj/item/I in all_items) //Check for plasma tanks
 				if(istype(I, steal_target))
@@ -83,7 +92,7 @@
 
 			if(B)
 				var/target = text2num(target_name)
-				var/found_amount = 0.0
+				var/found_amount = 0
 				for(var/obj/item/weapon/coin/C in B)
 					found_amount++
 				return found_amount>=target

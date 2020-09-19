@@ -6,7 +6,7 @@
 	icon_state = "implant_evil"
 	implant_color = "r"
 	is_legal = FALSE
-	origin_tech = list(TECH_MATERIAL=2, TECH_COMBAT=3, TECH_BIO=4, TECH_ILLEGAL=4)
+	origin_tech = list(TECH_MATERIAL=2, TECH_COMBAT=3, TECH_BIO=4, TECH_COVERT=4)
 
 /obj/item/weapon/implant/explosive/New()
 	..()
@@ -110,10 +110,10 @@
 		return
 	malfunction = MALFUNCTION_TEMPORARY
 	switch (severity)
-		if (2.0)	//Weak EMP will make implant tear limbs off.
+		if (2)	//Weak EMP will make implant tear limbs off.
 			if (prob(50))
 				small_boom()
-		if (1.0)	//strong EMP will melt implant either making it go off, or disarming it
+		if (1)	//strong EMP will melt implant either making it go off, or disarming it
 			if (prob(70))
 				if (prob(50))
 					small_boom()

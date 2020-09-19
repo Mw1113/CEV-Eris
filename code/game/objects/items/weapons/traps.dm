@@ -256,6 +256,11 @@ Freeing yourself is much harder than freeing someone else. Calling for help is a
 	if (!L || L.mob_size < min_size)
 		return
 
+	if (ismech(L))
+		deployed = FALSE
+		playsound(src, 'sound/effects/impacts/beartrap_shut.ogg', 100, 1,10,10)
+		return
+
 	if(L.lying)
 		target_zone = ran_zone()
 	else
@@ -311,11 +316,13 @@ Very rarely it might escape
 /obj/item/weapon/beartrap/Crossed(AM as mob|obj)
 	if(deployed && isliving(AM))
 		var/mob/living/L = AM
-		if(("\ref[L]" in aware_mobs) && MOVING_DELIBERATELY(L))
-			return ..()
-		prob_catch = initial(prob_catch)
-		prob_catch -= L.skill_to_evade_traps(prob_catch)
-		if(!prob(prob_catch))
+		var/true_prob_catch = prob_catch - L.skill_to_evade_traps()
+		if("\ref[L]" in aware_mobs)
+			if(MOVING_DELIBERATELY(L))
+				return ..()
+			else
+				true_prob_catch -= 30
+		if(!prob(true_prob_catch))
 			return ..()
 		L.visible_message(
 			SPAN_DANGER("[L] steps on \the [src]."),

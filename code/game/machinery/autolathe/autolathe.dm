@@ -460,6 +460,13 @@
 
 	disk = null
 
+/obj/machinery/autolathe/AltClick(mob/living/user)
+	if(user.incapacitated())
+		to_chat(user, SPAN_WARNING("You can't do that right now!"))
+		return
+	if(!in_range(src, user))
+		return
+	src.eject_disk(user)
 
 /obj/machinery/autolathe/proc/eat(mob/living/user, obj/item/eating)
 	if(!eating && istype(user))
@@ -767,23 +774,28 @@
 	var/whole_amount = round(amount)
 	var/remainder = amount - whole_amount
 
-
 	if (whole_amount)
 		var/obj/item/stack/material/S = new M.stack_type(drop_location())
 
 		//Accounting for the possibility of too much to fit in one stack
 		if (whole_amount <= S.max_amount)
 			S.amount = whole_amount
+			S.update_strings()
+			S.update_icon()
 		else
 			//There's too much, how many stacks do we need
 			var/fullstacks = round(whole_amount / S.max_amount)
 			//And how many sheets leftover for this stack
 			S.amount = whole_amount % S.max_amount
 
+			if (!S.amount)
+				qdel(S)
+
 			for(var/i = 0; i < fullstacks; i++)
 				var/obj/item/stack/material/MS = new M.stack_type(drop_location())
 				MS.amount = MS.max_amount
-
+				MS.update_strings()
+				MS.update_icon()
 
 	//And if there's any remainder, we eject that as a shard
 	if (remainder)
@@ -826,7 +838,7 @@
 	las_rating -= las_amount
 
 	speed = initial(speed) + man_rating + las_rating
-	mat_efficiency = max(0.2, 1.0 - (man_rating * 0.1))
+	mat_efficiency = max(0.2, 1 - (man_rating * 0.1))
 
 
 

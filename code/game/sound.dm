@@ -334,8 +334,13 @@ var/list/rummage_sound = list(\
 		var/mob/M = P
 		if(!M || !M.client)
 			continue
-
-		if(get_dist(M, turf_source) <= maxdistance)
+		var/dist = get_dist(M, turf_source)
+		if(dist <= maxdistance + 3)
+			if(dist > maxdistance)
+				if(!ishuman(M))
+					continue
+				else if(!M.stats.getPerk(PERK_EAR_OF_QUICKSILVER))
+					continue
 			var/turf/T = get_turf(M)
 
 			if(T && (T.z == turf_source.z || zrange && abs(T.z - turf_source.z) <= zrange))
@@ -343,7 +348,7 @@ var/list/rummage_sound = list(\
 
 var/const/FALLOFF_SOUNDS = 0.5
 
-/mob/proc/playsound_local(var/turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, extrarange, override_env, envdry, envwet, use_pressure = TRUE)
+/mob/proc/playsound_local(turf/turf_source, soundin, vol as num, vary, frequency, falloff, is_global, extrarange, override_env, envdry, envwet, use_pressure = TRUE)
 	if(!src.client || ear_deaf > 0)
 		return
 
@@ -361,11 +366,11 @@ var/const/FALLOFF_SOUNDS = 0.5
 			S.frequency = get_rand_frequency()
 
 	//sound volume falloff with pressure
-	var/pressure_factor = 1.0
+	var/pressure_factor = 1
 	
 	var/turf/T = get_turf(src)
 	// 3D sounds, the technology is here!
-	if(isturf(turf_source))
+	if(T && isturf(turf_source))
 		//sound volume falloff with distance
 		var/distance = get_dist(T, turf_source)
 
@@ -427,7 +432,7 @@ var/const/FALLOFF_SOUNDS = 0.5
 			S.environment = SPACE
 		else
 			var/area/A = get_area(src)
-			S.environment = A.sound_env
+			S.environment = A?.sound_env
 
 	var/list/echo_list = new(18)
 	echo_list[ECHO_DIRECT] = envdry

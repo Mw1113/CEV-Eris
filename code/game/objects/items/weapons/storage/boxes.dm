@@ -294,6 +294,16 @@
 	for(var/i in 1 to 5)
 		new /obj/item/weapon/grenade/anti_photon(src)
 
+/obj/item/weapon/storage/box/incendiary
+	name = "box of incendiary grenades"
+	desc = "A box containing 5 incendiary grenades."
+	icon_state = "box_security"
+	illustration = "flashbang"
+
+/obj/item/weapon/storage/box/incendiary/populate_contents()
+	for(var/i in 1 to 5)
+		new /obj/item/weapon/grenade/chem_grenade/incendiary(src)
+
 /obj/item/weapon/storage/box/trackimp
 	name = "boxed tracking implant kit"
 	desc = "Box full of scum-bag tracking utensils."
@@ -306,7 +316,7 @@
 	new /obj/item/weapon/implantcase/tracking(src)
 	new /obj/item/weapon/implanter(src)
 	new /obj/item/weapon/implantpad(src)
-	new /obj/item/weapon/locator(src)
+	new /obj/item/device/gps/locator(src)
 
 /obj/item/weapon/storage/box/chemimp
 	name = "boxed chemical implant kit"

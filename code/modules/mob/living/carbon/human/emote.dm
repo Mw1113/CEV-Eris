@@ -16,7 +16,7 @@
 		if (I.implanted)
 			I.trigger(act, src)
 
-	if(src.stat == 2.0 && (act != "deathgasp"))
+	if(src.stat == 2 && (act != "deathgasp"))
 		return
 
 	var/cloud_emote = ""
@@ -222,7 +222,10 @@
 			cloud_emote = "cloud-gasp"
 
 		if ("deathgasp")
-			message = "[species.death_message]"
+			if(stats.getPerk(PERK_TERRIBLE_FATE))
+				message = "their inert body emits a strange sensation and a cold invades your body. Their screams before dying recount in your mind."
+			else
+				message = "[species.death_message]"
 			m_type = 1
 
 		if ("giggle")

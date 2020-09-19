@@ -16,6 +16,7 @@
 //The minimum is defined above. The value of change will be decided by random
 	var/list/oddity_stats
 	var/sanity_value = 1
+	var/datum/perk/oddity/perk
 
 
 /obj/item/weapon/oddity/Initialize()
@@ -26,6 +27,14 @@
 		for(var/stat in oddity_stats)
 			oddity_stats[stat] = rand(1, oddity_stats[stat])
 	AddComponent(/datum/component/inspiration, oddity_stats)
+	if(!perk)
+		perk = pick(subtypesof(/datum/perk/oddity))
+
+/obj/item/weapon/oddity/examine(user)
+	..()
+	if(perk)
+		var/datum/perk/oddity/OD = GLOB.all_perks[perk]
+		to_chat(user, SPAN_NOTICE("Strange words echo in your head: <span style='color:orange'>[OD]. [OD.desc]</span>"))
 
 //Oddities are separated into categories depending on their origin. They are meant to be used both in maints and derelicts, so this is important
 //This is done by subtypes, because this way even densiest code monkey will not able to misuse them
@@ -229,3 +238,12 @@
 		STAT_ROB = 6,
 		STAT_VIG = 6,
 	)
+
+/obj/item/weapon/oddity/techno
+	name = "Unknown technological part"
+	desc = "Technological part maded by Techno-Tribalism Enforcer."
+	icon_state = "techno_part1"
+
+/obj/item/weapon/oddity/techno/Initialize()
+	icon_state = "techno_part[rand(1,7)]"
+	.=..()

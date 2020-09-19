@@ -567,7 +567,8 @@
 
 
 /datum/admin_topic/boot2
-	keyword = "boot"
+	keyword = "boot2"
+	require_perms = list(R_MOD|R_ADMIN)
 
 /datum/admin_topic/boot2/Run(list/input)
 	var/mob/M = locate(input["boot2"])
@@ -647,7 +648,8 @@
 			log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 			message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 
-			del(M.client)
+			if(!delayed)
+				del(M.client)
 			//qdel(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 		if("No")
 			var/no_ip = 0
@@ -673,8 +675,8 @@
 			var/banip = no_ip ? null : -1
 			source.DB_ban_record(BANTYPE_PERMA, M, -1, reason, banip, delayed_ban = delayed)
 
-
-			del(M.client)
+			if(!delayed)
+				del(M.client)
 		if("Cancel")
 			return
 
@@ -804,6 +806,29 @@
 	speech = sanitize(speech) // Nah, we don't trust them
 	log_admin("[key_name(usr)] forced [key_name(M)] to say: [speech]")
 	message_admins("\blue [key_name_admin(usr)] forced [key_name_admin(M)] to say: [speech]")
+
+/datum/admin_topic/forcesanity
+	keyword = "forcesanity"
+	require_perms = list(R_FUN)
+
+/datum/admin_topic/forcesanity/Run(list/input)
+	var/mob/living/carbon/human/H = locate(input["forcesanity"])
+	if(!ishuman(H))
+		to_chat(usr, "This can only be used on instances of type /human.")
+		return
+
+	var/datum/breakdown/B = input("What breakdown will [key_name(H)] suffer from?", "Sanity Breakdown") as null | anything in subtypesof(/datum/breakdown)
+	if(!B)
+		return
+	B = new B(H.sanity)
+	if(!B.can_occur())
+		to_chat(usr, "[B] could not occur. [key_name(H)] did not meet the right conditions.")
+		qdel(B)
+		return
+	if(B.occur())
+		H.sanity.breakdowns += B
+		to_chat(usr, SPAN_NOTICE("[B] has occurred for [key_name(H)]."))
+		return
 
 
 /datum/admin_topic/revive

@@ -2,7 +2,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job/engineering
 	belt = /obj/item/weapon/storage/belt/utility/full
 	l_ear = /obj/item/device/radio/headset/headset_eng
-	shoes = /obj/item/clothing/shoes/jackboots
+	shoes = /obj/item/clothing/shoes/workboots
 	gloves = /obj/item/clothing/gloves/thick
 	pda_slot = slot_l_store
 	r_pocket = /obj/item/device/t_scanner
@@ -24,10 +24,10 @@
 
 /decl/hierarchy/outfit/job/engineering/engineer
 	name = OUTFIT_JOB_NAME("Technomancer")
-	head = /obj/item/clothing/head/hardhat
+	head = /obj/item/clothing/head/armor/helmet/technomancer
 	uniform = /obj/item/clothing/under/rank/engineer
 	suit = /obj/item/clothing/suit/storage/vest/insulated
-	head = /obj/item/clothing/head/hardhat
+	head = /obj/item/clothing/head/armor/helmet/technomancer
 	id_type = /obj/item/weapon/card/id/engie
 	pda_type = /obj/item/modular_computer/pda/engineering
 

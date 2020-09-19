@@ -57,10 +57,10 @@
 
 /obj/machinery/chemical_dispenser/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(1)
 			del(src)
 			return
-		if(2.0)
+		if(2)
 			if (prob(50))
 				del(src)
 				return
@@ -75,7 +75,7 @@
 
 	var/list/chemicals = list()
 	for (var/re in dispensable_reagents)
-		var/datum/reagent/temp = chemical_reagents_list[re]
+		var/datum/reagent/temp = GLOB.chemical_reagents_list[re]
 		if(temp)
 			chemicals.Add(list(list("title" = temp.name, "id" = temp.id, "commands" = list("dispense" = temp.id)))) // list in a list because Byond merges the first list...
 	data["chemicals"] = chemicals
@@ -99,6 +99,21 @@
 		// open the new ui window
 		ui.open()
 
+/obj/machinery/chemical_dispenser/proc/detach()
+	if(beaker)
+		var/obj/item/weapon/reagent_containers/B = beaker
+		B.loc = loc
+		beaker = null
+
+/obj/machinery/chemical_dispenser/AltClick(mob/living/user)
+	if(user.incapacitated())
+		to_chat(user, SPAN_WARNING("You can't do that right now!"))
+		return
+	if(!in_range(src, user))
+		return
+	src.detach()
+	
+
 /obj/machinery/chemical_dispenser/Topic(href, href_list)
 	if(..())
 		return
@@ -117,12 +132,10 @@
 			var/added_amount = min(amount, cell.charge / chemical_dispenser_ENERGY_COST, space)
 			R.add_reagent(href_list["dispense"], added_amount)
 			cell.use(added_amount * chemical_dispenser_ENERGY_COST)
+			investigate_log("dispensed [href_list["dispense"]] into [B], while being operated by [key_name(usr)]", "chemistry")
 
 	if(href_list["ejectBeaker"])
-		if(beaker)
-			var/obj/item/weapon/reagent_containers/B = beaker
-			B.loc = loc
-			beaker = null
+		src.detach()
 
 	return 1 // update UIs attached to this object
 
@@ -211,9 +224,10 @@
 			to_chat(user, "You re-enable the 'cheap bastards' lock, disabling hidden and very expensive boozes.")
 			dispensable_reagents -= hacked_reagents
 
-/obj/machinery/chemical_dispenser/meds
-	name = "chem dispenser magic"
-	ui_title = "Chem Dispenser 9000"
+/obj/machinery/chemical_dispenser/admin
+	name = "debug chem dispenser"
+	desc = "A mysterious chemical dispenser that can produce all sorts of highly advanced medicines at the press of a button."
+	ui_title = "Cheat Synthesizer 1337"
 	dispensable_reagents = list(
 		"inaprovaline","ryetalyn","paracetamol",
 		"tramadol","oxycodone","sterilizine",
@@ -221,10 +235,13 @@
 		"dexalin","dexalinp","tricordrazine",
 		"anti_toxin","synaptizine","hyronalin",
 		"arithrazine","alkysine","imidazoline",
-		"peridaxon","bicaridine","hyperzine",
+		"peridaxon","bicaridine","meralyne","hyperzine",
 		"rezadone","spaceacillin","ethylredoxrazine",
 		"stoxin","chloralhydrate","cryoxadone",
-		"clonexadone"
+		"clonexadone","ossisine","noexcutite","kyphotorin",
+		"detox","polystem","purger","addictol","aminazine",
+		"vomitol","haloperidol","paroxetine","citalopram",
+		"methylphenidate"
 	)
 
 /obj/machinery/chemical_dispenser/industrial

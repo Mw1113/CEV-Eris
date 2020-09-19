@@ -77,7 +77,9 @@
 	icon_state = "utility_neotheology"
 	can_hold_extra = list(
 		/obj/item/weapon/book/ritual/cruciform,
-		/obj/item/weapon/implant/core_implant/cruciform
+		/obj/item/weapon/implant/core_implant/cruciform,
+		/obj/item/weapon/soap,
+		/obj/item/weapon/reagent_containers/spray/cleaner
 	)
 
 /obj/item/weapon/storage/belt/medical
@@ -106,13 +108,34 @@
 		/obj/item/clothing/glasses,
 		/obj/item/weapon/tool/crowbar,
 		/obj/item/device/lighting/toggleable/flashlight,
-		/obj/item/weapon/extinguisher/mini
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/stack/nanopaste,
+		/obj/item/bodybag,
+		/obj/item/weapon/tool/bonesetter,
+		/obj/item/weapon/tool/scalpel,
+		/obj/item/weapon/tool/scalpel/advanced,
+		/obj/item/weapon/tool/scalpel/laser,
+		/obj/item/weapon/tool/surgicaldrill,
+		/obj/item/weapon/tool/cautery,
+		/obj/item/weapon/tool/retractor,
+		/obj/item/weapon/tool/saw/circular,
+		/obj/item/weapon/tool/hemostat,
+		/obj/item/weapon/reagent_containers/pill,
+		/obj/item/weapon/storage/pill_bottle,
+		/obj/item/bodybag/cryobag
 	)
 
 /obj/item/weapon/storage/belt/medical/emt
 	name = "EMT utility belt"
 	desc = "A sturdy black webbing belt with attached pouches."
 	icon_state = "emsbelt"
+	item_state = "emsbelt"
+	can_hold = list(
+		/obj/item/weapon/inflatable_dispenser,
+		/obj/item/device/radio/off,
+		/obj/item/taperoll/medical
+
+	)
 
 /obj/item/weapon/storage/belt/tactical
 	name = "tactical belt"
@@ -172,3 +195,14 @@
 	can_hold = list(
 		/obj/item/clothing/mask/luchador
 	)
+
+/obj/item/weapon/storage/belt/holding
+	name = "belt of holding"
+	desc = "The greatest in pants-supporting bluespace technology."
+	icon_state = "holdingbelt"
+	item_state = "holdingbelt"
+	storage_slots = 14
+	max_w_class = ITEM_SIZE_BULKY
+	max_storage_space = DEFAULT_HUGE_STORAGE * 1.25
+	matter = list(MATERIAL_STEEL = 6, MATERIAL_GOLD = 6, MATERIAL_DIAMOND = 2, MATERIAL_URANIUM = 3)
+	origin_tech = list(TECH_BLUESPACE = 4)

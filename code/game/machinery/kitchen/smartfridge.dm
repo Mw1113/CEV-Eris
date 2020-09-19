@@ -7,7 +7,7 @@
 	layer = BELOW_OBJ_LAYER
 	density = TRUE
 	anchored = TRUE
-	use_power = 1
+	use_power = IDLE_POWER_USE
 	idle_power_usage = 5
 	active_power_usage = 100
 	reagent_flags = NO_REACT
@@ -176,7 +176,7 @@
 		S.dryness += drying_power * (rand(0.85, 1.15))
 		if (S.dryness >= 1)
 			if(S.dried_type == S.type || !S.dried_type)
-				S.dry = 1
+				S.dry = TRUE
 				S.name = "dried [S.name]"
 				S.color = "#AAAAAA"
 			else

@@ -1,7 +1,7 @@
 #define REAGENTS_PER_SHEET 20
 
 /obj/machinery/reagentgrinder
-	use_power = 1
+	use_power = IDLE_POWER_USE
 	idle_power_usage = 5
 	active_power_usage = 100
 	var/nano_template
@@ -220,6 +220,14 @@
 	beaker.forceMove(loc)
 	beaker = null
 	update_icon()
+
+/obj/machinery/reagentgrinder/portable/AltClick(mob/living/user)
+	if(user.incapacitated())
+		to_chat(user, SPAN_WARNING("You can't do that right now!"))
+		return
+	if(!in_range(src, user))
+		return
+	src.detach()
 
 /obj/machinery/reagentgrinder/portable/proc/grind()
 	power_change()

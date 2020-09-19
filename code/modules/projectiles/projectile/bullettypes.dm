@@ -11,13 +11,13 @@ There are important things regarding this file:
 */
 //Low-caliber pistols and SMGs .35
 /obj/item/projectile/bullet/pistol
-	damage_types = list(BRUTE = 24)
-	armor_penetration = 5
+	damage_types = list(BRUTE = 28)
+	armor_penetration = 10
 	can_ricochet = TRUE
 
 /obj/item/projectile/bullet/pistol/hv
-	damage_types = list(BRUTE = 28)
-	armor_penetration = 10
+	damage_types = list(BRUTE = 32)
+	armor_penetration = 20
 	penetrating = 1
 	step_delay = 0.75
 
@@ -31,9 +31,10 @@ There are important things regarding this file:
 	can_ricochet = FALSE
 
 /obj/item/projectile/bullet/pistol/rubber
+	icon_state = "rubber"
 	name = "rubber bullet"
 	damage_types = list(BRUTE = 3)
-	agony = 22
+	agony = 25
 	armor_penetration = 0
 	embed = FALSE
 	sharp = FALSE
@@ -67,6 +68,7 @@ There are important things regarding this file:
 	step_delay = 0.75
 
 /obj/item/projectile/bullet/srifle/rubber
+	icon_state = "rubber"
 	name = "rubber bullet"
 	damage_types = list(BRUTE = 3)
 	agony = 30
@@ -100,9 +102,10 @@ There are important things regarding this file:
 	can_ricochet = TRUE
 
 /obj/item/projectile/bullet/clrifle/rubber
+	icon_state = "rubber"
 	name = "rubber bullet"
 	damage_types = list(BRUTE = 3)
-	agony = 16
+	agony = 22
 	armor_penetration = 0
 	embed = FALSE
 	sharp = FALSE
@@ -132,6 +135,7 @@ There are important things regarding this file:
 	step_delay = 0.75
 
 /obj/item/projectile/bullet/lrifle/rubber
+	icon_state = "rubber"
 	name = "rubber bullet"
 	damage_types = list(BRUTE = 3)
 	agony = 25
@@ -141,7 +145,7 @@ There are important things regarding this file:
 
 //Revolvers and high-caliber pistols .40
 /obj/item/projectile/bullet/magnum
-	damage_types = list(BRUTE = 32)
+	damage_types = list(BRUTE = 34)
 	armor_penetration = 15
 	can_ricochet = TRUE
 
@@ -155,12 +159,13 @@ There are important things regarding this file:
 	can_ricochet = FALSE
 
 /obj/item/projectile/bullet/magnum/hv
-	damage_types = list(BRUTE = 35)
+	damage_types = list(BRUTE = 39)
 	armor_penetration = 20
 	penetrating = 1
 	step_delay = 0.75
 
 /obj/item/projectile/bullet/magnum/rubber
+	icon_state = "rubber"
 	name = "rubber bullet"
 	damage_types = list(BRUTE = 8)
 	agony = 32
@@ -182,14 +187,14 @@ There are important things regarding this file:
 	name = "slug"
 	icon_state = "slug"
 	damage_types = list(BRUTE = 54)
-	armor_penetration = 10
+	armor_penetration = 15
 	knockback = 1
-	step_delay = 1.65
+	step_delay = 1.1
 
-/obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
+/obj/item/projectile/bullet/shotgun/beanbag
 	name = "beanbag"
 	icon_state = "buckshot"
-	check_armour = ARMOR_MELEE
+	check_armour = ARMOR_BULLET //neverforget
 	damage_types = list(BRUTE = 10)
 	agony = 60
 	armor_penetration = 0

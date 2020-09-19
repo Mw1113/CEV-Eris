@@ -51,14 +51,14 @@
 
 /obj/structure/ex_act(severity)
 	switch(severity)
-		if(1.0)
+		if(1)
 			qdel(src)
 			return
-		if(2.0)
+		if(2)
 			if(prob(50))
 				qdel(src)
 				return
-		if(3.0)
+		if(3)
 			return
 
 /obj/structure/New()
@@ -131,7 +131,7 @@
 	usr.visible_message(SPAN_WARNING("[user] starts climbing onto \the [src]!"))
 	climbers |= user
 
-	var/delay = (issmall(user) ? 20 : 34)
+	var/delay = (issmall(user) ? 20 : 34) * user.mod_climb_delay
 	var/duration = max(delay * user.stats.getMult(STAT_VIG, STAT_LEVEL_EXPERT), delay * 0.66)
 	if(!do_after(user, duration, src))
 		climbers -= user

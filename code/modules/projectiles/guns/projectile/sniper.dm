@@ -7,7 +7,7 @@
 	w_class = ITEM_SIZE_HUGE
 	force = WEAPON_FORCE_PAINFUL
 	slot_flags = SLOT_BACK
-	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_COVERT = 2)
 	caliber = CAL_ANTIM
 	recoil_buildup = 75
 	handle_casings = HOLD_CASINGS
@@ -21,7 +21,7 @@
 	one_hand_penalty = 10
 	var/bolt_open = 0
 	var/item_suffix = ""
-	zoom_factor = 2.0
+	zoom_factor = 2
 	twohanded = TRUE
 
 /obj/item/weapon/gun/projectile/heavysniper/update_icon()

@@ -58,7 +58,10 @@
 	var/knockback = 0
 
 	var/hitscan = FALSE		// whether the projectile should be hitscan
-	var/step_delay = 1	// the delay between iterations if not a hitscan projectile
+
+	var/step_delay = 0.8	// the delay between iterations if not a hitscan projectile
+							// This thing right here goes to sleep(). We should not send non decimal things to sleep(),
+							// but it was doing it for a while, it works, and this whole shit should be rewriten or ported from another codebase.
 
 	// effect types to be used
 	var/muzzle_type
@@ -129,7 +132,7 @@
 //Checks if the projectile is eligible for embedding. Not that it necessarily will.
 /obj/item/projectile/proc/can_embed()
 	//embed must be enabled and damage type must be brute
-	if(!embed || damage_types[BRUTE] != 0)
+	if(!embed || damage_types[BRUTE] <= 0)
 		return FALSE
 	return TRUE
 
@@ -594,8 +597,14 @@
 				var/mob/living/carbon/human/H = target_mob
 				blood_color = H.species.blood_color
 			new /obj/effect/overlay/temp/dir_setting/bloodsplatter(target_mob.loc, splatter_dir, blood_color)
-			if(prob(50))
+			if(target_loca && prob(50))
 				target_loca.add_blood(L)
+
+	if(istype(src, /obj/item/projectile/beam/psychic) && istype(target_mob, /mob/living/carbon/human))
+		var/obj/item/projectile/beam/psychic/psy = src
+		var/mob/living/carbon/human/H = target_mob
+		if(psy.traitor && result && (H.sanity.level <= 0))
+			psy.holder.reg_break(H)
 
 	return TRUE
 

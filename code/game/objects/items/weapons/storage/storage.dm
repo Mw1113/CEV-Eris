@@ -234,7 +234,7 @@
 			if(I.on_found(user)) //trigger mousetraps etc.
 				return
 
-	var/datum/hud/data = global.HUDdatums[user.defaultHUD]
+	var/datum/hud/data = GLOB.HUDdatums[user.defaultHUD]
 	if (data)
 		generateHUD(data).show(user.client)
 		is_seeing |= user
@@ -259,6 +259,15 @@
 /obj/item/weapon/storage/proc/close(var/mob/user)
 	hide_from(user)
 
+/obj/item/weapon/storage/AltClick(mob/user)
+	if(user.incapacitated())
+		to_chat(user, SPAN_WARNING("You can't do that right now!"))
+		return
+	if(!in_range(src, user))
+		return
+	else
+		src.open(user)
+
 /obj/item/weapon/storage/proc/close_all()
 	for (var/mob/M in is_seeing)
 		close(M)
@@ -266,7 +275,7 @@
 /obj/item/weapon/storage/proc/refresh_all()
 	for (var/mob/M in is_seeing)
 		if (M.client)
-			var/datum/hud/data = global.HUDdatums[M.defaultHUD]
+			var/datum/hud/data = GLOB.HUDdatums[M.defaultHUD]
 			if (data)
 				generateHUD(data).show(M.client)
 

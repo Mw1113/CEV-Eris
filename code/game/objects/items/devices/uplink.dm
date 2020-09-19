@@ -24,7 +24,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 
 	var/passive_gain = 0.1 //Number of telecrystals this uplink gains per minute.
 	//The total uses is only increased when this is a whole number
-	var/gain_progress = 0.0
+	var/gain_progress = 0
 
 	var/bsdm_time = 0
 
@@ -152,7 +152,7 @@ A list of items and costs is stored under the datum of every game mode, alongsid
 	else if(href_list["lock"])
 		toggle()
 		var/datum/nanoui/ui = SSnano.get_open_ui(user, src, "main")
-		ui.close()
+		ui?.close()
 	else if(href_list["return"])
 		nanoui_menu = round(nanoui_menu/10)
 	else if(href_list["menu"])
