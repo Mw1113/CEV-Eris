@@ -8,7 +8,7 @@
 	spawn_tags = SPAWN_TAG_ITEM
 	rarity_value = 10
 	spawn_frequency = 10 //MAX
-	bad_types = /obj/item
+	bad_type = /obj/item
 
 	var/image/blood_overlay //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
@@ -306,7 +306,7 @@
 
 	if(istype(H))
 
-		var/obj/item/organ/internal/eyes/eyes = H.internal_organs_by_name[BP_EYES]
+		var/obj/item/organ/internal/eyes/eyes = H.random_organ_by_process(OP_EYES)
 
 		if(!eyes)
 			return

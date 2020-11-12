@@ -128,7 +128,7 @@
 	. = ..()
 	if(.)
 		if(src.nutrition && src.stat != DEAD)
-			src.nutrition -= nutrition_step
+			src.adjustNutrition(-nutrition_step)
 
 /mob/living/simple_animal/Released()
 	//These will cause mobs to immediately do things when released.
@@ -167,16 +167,16 @@
 		to_chat(user, SPAN_WARNING("It looks wounded."))
 
 /mob/living/simple_animal/Life()
-	..()
+	.=..()
 
 	if(!stasis)
 
-		if(stat == DEAD)
-			return 0
+		if(!.)
+			return FALSE
 
 		if(health <= 0)
 			death()
-			return
+			return FALSE
 
 		if(health > maxHealth)
 			health = maxHealth
@@ -250,7 +250,7 @@
 					speak_audio()
 
 			if(incapacitated())
-				return 1
+				return TRUE
 
 			//Movement
 			turns_since_move++
@@ -264,7 +264,7 @@
 							step_glide(src, moving_to, DELAY2GLIDESIZE(0.5 SECONDS))
 							turns_since_move = 0
 
-	return 1
+	return TRUE
 
 /mob/living/simple_animal/proc/visible_emote(message)
 	if(islist(message))
@@ -282,7 +282,7 @@
 /mob/living/simple_animal/proc/process_food()
 	if (hunger_enabled)
 		if (nutrition)
-			nutrition -= nutrition_step//Bigger animals get hungry faster
+			adjustNutrition(-nutrition_step)//Bigger animals get hungry faster
 			nutrition = max(0,min(nutrition, max_nutrition))//clamp the value
 		else
 			if (prob(3))

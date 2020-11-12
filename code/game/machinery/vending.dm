@@ -1090,7 +1090,11 @@
 					/obj/item/weapon/flame/lighter/random = 4,
 					/obj/item/weapon/storage/fancy/cigar = 5,
 					/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5,
-					/obj/item/clothing/mask/vape = 5
+					/obj/item/clothing/mask/vape = 5,
+					/obj/item/weapon/reagent_containers/glass/beaker/vial/vape/berry = 10,
+					/obj/item/weapon/reagent_containers/glass/beaker/vial/vape/banana = 10,
+					/obj/item/weapon/reagent_containers/glass/beaker/vial/vape/lemon = 10,
+					/obj/item/weapon/reagent_containers/glass/beaker/vial/vape/nicotine = 5
 				   )
 
 	prices = list(/obj/item/clothing/mask/smokable/cigarette/cigar = 200,
@@ -1099,7 +1103,12 @@
 				  /obj/item/weapon/storage/box/matches = 10,
 				  /obj/item/weapon/flame/lighter/random = 5,
 				  /obj/item/weapon/flame/lighter/zippo = 250,
-				  /obj/item/clothing/mask/vape = 300)
+				  /obj/item/clothing/mask/vape = 300,
+				  /obj/item/weapon/reagent_containers/glass/beaker/vial/vape/berry = 100,
+				  /obj/item/weapon/reagent_containers/glass/beaker/vial/vape/banana = 100,
+				  /obj/item/weapon/reagent_containers/glass/beaker/vial/vape/lemon = 100,
+				  /obj/item/weapon/reagent_containers/glass/beaker/vial/vape/nicotine = 100
+				  )
 
 
 /obj/machinery/vending/medical
@@ -1214,7 +1223,10 @@
 					/obj/item/device/hailer = 8,
 					/obj/item/taperoll/police = 8,
 					/obj/item/device/holowarrant = 8,
-					/obj/item/weapon/storage/box/evidence = 2)
+					/obj/item/weapon/storage/box/evidence = 2,
+					/obj/item/weapon/computer_hardware/hard_drive/portable/design/security = 2,
+					/obj/item/weapon/computer_hardware/hard_drive/portable/design/armor/ih = 2,
+					/obj/item/weapon/computer_hardware/hard_drive/portable/design/armor/ih/bulletproof = 1)
 	contraband = list(/obj/item/weapon/tool/knife/tacknife = 4,/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12)
 	auto_price = FALSE
 
@@ -1411,6 +1423,7 @@
 					/obj/item/weapon/computer_hardware/hard_drive/portable/design/computer = 10,
 					/obj/item/weapon/computer_hardware/hard_drive/portable/design/medical = 10,
 					/obj/item/weapon/computer_hardware/hard_drive/portable/design/security = 5,
+					/obj/item/weapon/computer_hardware/hard_drive/portable/design/armor/generic = 5,
 					/obj/item/weapon/computer_hardware/hard_drive/portable/design/guns/fs_cheap_guns = 5,
 					/obj/item/weapon/computer_hardware/hard_drive/portable/design/nonlethal_ammo = 10,
 					/obj/item/weapon/electronics/circuitboard/autolathe = 3,
@@ -1428,6 +1441,7 @@
 					/obj/item/weapon/computer_hardware/hard_drive/portable/design/medical = 400,
 					/obj/item/weapon/computer_hardware/hard_drive/portable/design/computer = 500,
 					/obj/item/weapon/computer_hardware/hard_drive/portable/design/security = 600,
+					/obj/item/weapon/computer_hardware/hard_drive/portable/design/armor/generic = 800,
 					/obj/item/weapon/computer_hardware/hard_drive/portable/design/guns/fs_cheap_guns = 3000,
 					/obj/item/weapon/computer_hardware/hard_drive/portable/design/nonlethal_ammo = 700,
 					/obj/item/weapon/electronics/circuitboard/autolathe = 700,

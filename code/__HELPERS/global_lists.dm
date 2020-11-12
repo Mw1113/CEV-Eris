@@ -69,6 +69,12 @@ GLOBAL_LIST_EMPTY(all_stash_datums)
 //PERKS
 GLOBAL_LIST_EMPTY(all_perks)
 
+//individual_objectives
+GLOBAL_LIST_EMPTY(all_faction_items)
+
+//faction_items
+GLOBAL_LIST_EMPTY(individual_objectives)
+
 //NeoTheology
 GLOBAL_LIST_EMPTY(all_rituals)//List of all rituals
 GLOBAL_LIST_EMPTY(global_ritual_cooldowns) // internal lists. Use ritual's cooldown_category
@@ -109,8 +115,6 @@ var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, 
 
 //A list of slots where an item doesn't count as "worn" if it's in one of them
 var/global/list/unworn_slots = list(slot_l_hand,slot_r_hand, slot_l_store, slot_r_store,slot_robot_equip_1,slot_robot_equip_2,slot_robot_equip_3)
-
-GLOBAL_LIST_EMPTY(all_spawn_data)
 
 //////////////////////////
 /////Initial Building/////
@@ -163,6 +167,11 @@ GLOBAL_LIST_EMPTY(all_spawn_data)
 	for(var/T in paths)
 		var/datum/job/J = new T
 		GLOB.joblist[J.title] = J
+
+	paths = subtypesof(/datum/individual_objective)
+	for(var/T in paths)
+		var/datum/individual_objective/IO = new T
+		GLOB.individual_objectives[T] = IO
 
 	//Stashes
 	paths = subtypesof(/datum/stash)
@@ -231,8 +240,6 @@ GLOBAL_LIST_EMPTY(all_spawn_data)
 		//Rituals which are just categories for subclasses will have a null phrase
 		if (R.phrase)
 			GLOB.all_rituals[R.name] = R
-
-	GLOB.all_spawn_data["loot_s_data"] = new /datum/loot_spawner_data
 
 	return 1
 

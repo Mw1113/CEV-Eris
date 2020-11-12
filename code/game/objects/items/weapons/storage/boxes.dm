@@ -31,7 +31,7 @@
 	var/illustration = "writing"
 	contained_sprite = TRUE
 	health = 20
-	bad_types = /obj/item/weapon/storage/box
+	bad_type = /obj/item/weapon/storage/box
 	spawn_blacklisted = FALSE
 	spawn_tags = SPAWN_TAG_BOX
 	rarity_value = 20
@@ -234,7 +234,7 @@
 	name = "box of .60 Anti Material shells"
 	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
 	illustration = "ammo"
-	rarity_value = 40
+	rarity_value = 80
 
 /obj/item/weapon/storage/box/sniperammo/populate_contents()
 	new /obj/item/ammo_casing/antim/prespawned(src)
